@@ -11,18 +11,35 @@ import json
 GRAMMAR_FILE = "shrdlite_grammar.fcfg"
 
 
+def get_tree_label(result):
+    """Returns the label of a NLTK Tree"""
+    try:
+        # First we try with NLTKv3, the .label() method:
+        return result.label()
+    except AttributeError, TypeError:
+        # If that doesn't work we try with NLTKv2, the .node attribute:
+        return result.node
+
+def get_all_parses(parser, utterance):
+    """Returns a sequence of all parse trees of an utterance"""
+    try:
+        # First we try with NLTKv2, the .nbest_parse() method:
+        return parser.nbest_parse(utterance)
+    except AttributeError, TypeError:
+        try:
+            # Then we try with NLTKv3, the .parse_all() method:
+            return parser.parse_all(utterance)
+        except AttributeError, TypeError:
+            # Finally we try with NLTKv3, the .parse() method:
+            return parser.parse(utterance)
+
 def parse(utterance):
     import nltk
     grammar = nltk.data.load("file:" + GRAMMAR_FILE, cache=False)
     parser = nltk.FeatureChartParser(grammar)
-    # API change between NLTK v2 and v3:
-    # - v2 uses .nbest_parse()
-    # - v3 will probably use .parse_all() or .parse() instead
-    do_parse = getattr(parser, 'nbest_parse', 
-                       getattr(parser, 'parse_all', parser.parse))
     try:
-        return [result.label()['sem'] 
-                for result in do_parse(utterance)]
+        return [get_tree_label(result)['sem'] 
+                for result in get_all_parses(parser, utterance)]
     except ValueError:
         return []
 
