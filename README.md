@@ -175,7 +175,7 @@ There is one grammar file, `shrdlite_grammar.fcfg`, which can be used like this:
 
 To test the command line program `shrdlite.py`, you can do this:
 
-    python shrdlite.py < ../medium.json
+    python shrdlite.py < ../examples/medium.json
 
 ### Prolog
 
@@ -191,7 +191,7 @@ There is one grammar file, `shrdlite_grammar.pl`, and one parser file
 To test the command line program `shrdlite.pl` in SWI Prolog, you should 
 be able to do this:
 
-    swipl -q -g main,halt -s shrdlite.pl < ../medium.json
+    swipl -q -g main,halt -s shrdlite.pl < ../examples/medium.json
 
 More information about SWI Prolog can found here: 
 
@@ -203,7 +203,7 @@ There are no good grammar libraries for Java, so this version uses the
 Prolog grammar via the GNUPrologJava library. After compilation you can
 test the command line program like this:
 
-    java -cp gnuprologjava-0.2.6.jar:json-simple-1.1.1.jar:. Shrdlite < ../medium.json
+    java -cp gnuprologjava-0.2.6.jar:json-simple-1.1.1.jar:. Shrdlite < ../examples/medium.json
 
 Read more about the needed libraries here:
 
@@ -223,7 +223,7 @@ implemented as an *Applicative Functor* (McBride & Paterson, 2008).
 
 To test the command line program `Shrdlite.hs` just do this:
 
-    runhaskell Shrdlite.hs < ../medium.json
+    runhaskell Shrdlite.hs < ../examples/medium.json
 
 To be able to read and write JSON, you have to install Text.JSON:
 
