@@ -6,6 +6,13 @@ import os
 import cgi
 from subprocess import Popen, PIPE, STDOUT
 
+################################################################################
+## IMPORTANT NOTE:
+## Uncomment the code for the programming language that you want to use.
+## And don't forget to edit the absolute path for your script -- 
+## it could be /usr/bin or /usr/local/bin or /opt/local/bin or anything else,
+## not to mention the horrendous Windows paths...
+
 # # Java
 # SCRIPTDIR = 'javaprolog'
 # SCRIPT = ['/usr/bin/java', '-cp', 'json-simple-1.1.1.jar:gnuprologjava-0.2.6.jar:.', 'Shrdlite']
@@ -18,17 +25,19 @@ from subprocess import Popen, PIPE, STDOUT
 # SCRIPTDIR = 'haskell'
 # SCRIPT = ['/usr/bin/runhaskell', 'Shrdlite.hs']
 
-# Python
-SCRIPTDIR = 'python'
-SCRIPT = ['/usr/bin/python', 'shrdlite.py']
+# # Python
+# SCRIPTDIR = 'python'
+# SCRIPT = ['/usr/bin/python', 'shrdlite.py']
 
-while not os.path.isdir(SCRIPTDIR):
-    SCRIPTDIR = os.path.join("..", SCRIPTDIR)
+################################################################################
 
 print('Content-type:text/plain')
 print()
 
 try:
+    while not os.path.isdir(SCRIPTDIR):
+        SCRIPTDIR = os.path.join("..", SCRIPTDIR)
+
     form = cgi.FieldStorage()
     data = form.getfirst('data')
     script = Popen(SCRIPT, cwd=SCRIPTDIR, stdin=PIPE, stdout=PIPE, stderr=PIPE)
