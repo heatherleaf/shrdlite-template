@@ -10,6 +10,19 @@ import json
 
 GRAMMAR_FILE = "shrdlite_grammar.fcfg"
 
+# IMPORTANT NOTE:
+# 
+# If you are using NLTK 2.0b9 (which is the one that is installed 
+# by the standard Ubuntu repository), then nltk.FeatureChartParser
+# (in the parse function) fails to parse some sentences! In this 
+# case you can use nltk.FeatureTopDownChartParser instead.
+# You can check if it is working by calling this:
+# 
+#   python shrdlite.py < ../examples/small.json
+# 
+# The program should return "Ambiguity error!". If it instead
+# returns "Parse error!", then the NLTK parser is not correct, 
+# and you should change to nltk.FeatureTopDownChartParser instead.
 
 def get_tree_label(result):
     """Returns the label of a NLTK Tree"""

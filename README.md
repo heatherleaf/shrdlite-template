@@ -177,6 +177,10 @@ To test the command line program `shrdlite.py`, you can do this:
 
     python shrdlite.py < ../examples/medium.json
 
+*Note:* NLTK version 2.0b9 (which is the one that is installed by the Ubuntu package
+manager) contains an error in `nltk.FeatureChartParser`! If you have this version,
+please use `nltk.FeatureTopDownChartParser` instead.
+
 ### Prolog
 
 There is one grammar file, `shrdlite_grammar.pl`, and one parser file
