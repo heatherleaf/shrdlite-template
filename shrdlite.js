@@ -3,7 +3,7 @@
 var AjaxScript = "cgi-bin/ajaxwrapper.py";
 
 // List of the JSON files that contain example worlds:
-var ExampleNames = ["small","medium"];
+var ExampleNames = ["small","medium","impossible"];
 var ExamplesFolder = "examples";
 
 // What the system says when it has nothing to do:
