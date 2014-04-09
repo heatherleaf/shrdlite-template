@@ -42,7 +42,8 @@ public class DCGParser {
     public List<Term> parseSentence(Term startCat, Term sentence) throws PrologException {
         Term resultsTerm = new VariableTerm("Results");
 		Term goalTerm = new CompoundTerm("parse_all", new Term[]{startCat, sentence, resultsTerm});
-        int rc = interpreter.runOnce(goalTerm);
+        Goal goal = interpreter.prepareGoal(goalTerm);
+        int rc = interpreter.execute(goal);
         assert (rc == PrologCode.SUCCESS || rc == PrologCode.SUCCESS_LAST);
         Term results = resultsTerm.dereference();
         return collectResults(results);
