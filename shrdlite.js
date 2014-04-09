@@ -385,7 +385,7 @@ function performPlan() {
         if (action) {
             timeout = moveObject(action[0], action[1]);
         } else if (item && item[0] != "#") {
-            if (window.speechSynthesis.speaking) {
+            if (UseSpeech && window.speechSynthesis.speaking) {
                 currentPlan.unshift(item);
                 timeout = AnimationPause;
             } else {
