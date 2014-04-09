@@ -31,15 +31,15 @@ public class DCGParser {
 		env.runInitialization(interpreter);
     }
 
-    public List<Term> parseSentence(String startCat, List sentence) throws PrologException {
+    public List<ParseTree> parseSentence(String startCat, List sentence) throws PrologException {
         return parseSentence(AtomTerm.get(startCat), atomListTerm(sentence));
     }
 
-    public List<Term> parseSentence(String startCat, String[] sentence) throws PrologException {
+    public List<ParseTree> parseSentence(String startCat, String[] sentence) throws PrologException {
         return parseSentence(AtomTerm.get(startCat), atomListTerm(sentence));
     }
 
-    public List<Term> parseSentence(Term startCat, Term sentence) throws PrologException {
+    public List<ParseTree> parseSentence(Term startCat, Term sentence) throws PrologException {
         Term resultsTerm = new VariableTerm("Results");
 		Term goalTerm = new CompoundTerm("parse_all", new Term[]{startCat, sentence, resultsTerm});
         Goal goal = interpreter.prepareGoal(goalTerm);
@@ -77,13 +77,29 @@ public class DCGParser {
         return listTerm;
     }
 
-    public List<Term> collectResults(Term results) {
-        List<Term> resultList = new ArrayList<Term>();
+    public List<ParseTree> collectResults(Term results) {
+        List<ParseTree> resultList = new ArrayList<ParseTree>();
         while (CompoundTerm.isListPair(results)) {
-            resultList.add(((CompoundTerm)results).args[0]);
+            resultList.add(toParseTree(((CompoundTerm)results).args[0]));
             results = ((CompoundTerm)results).args[1];
         }
         return resultList;
+    }
+
+    public ParseTree toParseTree(Term term) {
+        if (term.getTermType() == Term.COMPOUND) {
+            ParseTree tree = new ParseTree(((CompoundTerm)term).tag.functor.value);
+            for (Term child : ((CompoundTerm)term).args) {
+                tree.addChild(toParseTree(child));
+            }
+            return tree;
+        } else if (term.getTermType() == Term.ATOM) {
+            return new ParseTree(((AtomTerm)term).value);
+        } else {
+            throw new IllegalArgumentException("Unexpected type of Prolog term: " + 
+                                               term.getClass().toString() + 
+                                               " [" + term.toString() + "]");
+        }
     }
 
 }

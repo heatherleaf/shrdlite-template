@@ -38,10 +38,10 @@ public class Shrdlite {
         // String form = (String) objectinfo.get("form");
 
         DCGParser parser = new DCGParser("shrdlite_grammar.pl");
-        List<Term> trees = parser.parseSentence("command", utterance);
+        List<ParseTree> trees = parser.parseSentence("command", utterance);
         List tstrs = new ArrayList();
         result.put("trees", tstrs);
-        for (Term t : trees) {
+        for (ParseTree t : trees) {
             tstrs.add(t.toString());
         }
 
@@ -51,7 +51,7 @@ public class Shrdlite {
         } else {
             List goals = new ArrayList();
             // Interpreter interpreter = new Interpreter(world, holding, objects);
-            for (Term tree : trees) {
+            for (ParseTree tree : trees) {
                 // for (Goal goal : interpreter.interpret(tree)) {
                 //     goals.add(goal);
                 // }
