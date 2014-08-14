@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Shrdlite-template by heatherleaf</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Shrdlite-template</h1>
+          <h2>The Shrdlite programming project is a programming project in Artificial Intelligence, a course given at the University of Gothenburg and Chalmers University of Technology</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/heatherleaf/shrdlite-template/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/heatherleaf/shrdlite-template/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/heatherleaf/shrdlite-template" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="the-shrdlite-programming-project" class="anchor" href="#the-shrdlite-programming-project"><span class="octicon octicon-link"></span></a>The Shrdlite programming project</h1>
+
+<p>Shrdlite is a programming project in Artificial Intelligence, a course given 
+at the University of Gothenburg and Chalmers University of Technology.
+For more information, see the course webpages:</p>
+
+<ul>
+<li><a href="http://www.cse.chalmers.se/edu/course/TIN172/">http://www.cse.chalmers.se/edu/course/TIN172/</a></li>
+</ul><p>The goal of the project is to create an interpreter and a planner so that
+a person can control a robot in a blocks world to move around objects,
+by giving commands in natural language.</p>
+
+<p>To make the project more interesting, there is a web-based graphical 
+interface from which the user can interact with the blocks world.
+The interface is written in Javascript and SVG, and it communicates with
+the natural language parser, interpreter and planner via Ajax CGI.</p>
+
+<p>The natural language grammar and parser are already given, in four different
+formats, and can be used from at least four different programming languages:</p>
+
+<ul>
+<li><p>Prolog DCG: 
+This grammar can be used as is from any standard compliant Prolog, 
+but also from Java via the GNUPrologJava library.</p></li>
+<li><p>Python NLTK grammar: 
+This grammar is written using the NLTK library, and can be used 
+from within Python.</p></li>
+<li><p>Haskell combinator parser: 
+The grammar is written as parser combinators, and can be used 
+in a Haskell program.</p></li>
+<li><p>Grammatical Framework: 
+This grammar formalism has bindings to C/C++ and Python.</p></li>
+</ul><h2>
+<a name="local-web-server" class="anchor" href="#local-web-server"><span class="octicon octicon-link"></span></a>Local web server</h2>
+
+<p>To be able to run the graphical interface you need a web server. On Linux
+or Mac, there are no direct problems -- in fact, Mac comes preinstalled with
+the Apache server. But on Windows you have to install something.</p>
+
+<p>The local web server that these files are using is Python's built-in web
+server. To start it, just run</p>
+
+<pre><code>python -m CGIHTTPServer 8000
+</code></pre>
+
+<p>from the same directory as the file <code>shrdlite.html</code>. Now let the web
+server keep running and browse to any of these addresses:</p>
+
+<ul>
+<li><a href="http://localhost:8000/shrdlite.html">http://localhost:8000/shrdlite.html</a></li>
+<li><a href="http://127.0.0.1:8000/shrdlite.html">http://127.0.0.1:8000/shrdlite.html</a></li>
+<li><a href="http://0.0.0.0:8000/shrdlite.html">http://0.0.0.0:8000/shrdlite.html</a></li>
+</ul><h2>
+<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h2>
+
+<p>The graphical interface is written in SVG and Javascript in the file 
+<code>shrdlite.js</code>. The first 20 lines of the file contain some constants 
+that you can experiment with. Otherwise it shouldn't be necessary to 
+read or understand the Javscript code, if you don't want to.</p>
+
+<p>When the user enters an utterance, the Javascript calls the Ajax CGI script 
+<code>ajaxwrapper.py</code> with information about the current world and the user's
+utterance. The wrapper script calls another command line program, which
+is the one that you will be writing.</p>
+
+<p>Currently there are four possible alternatives for the command line program:</p>
+
+<ul>
+<li>
+<code>javaprolog/shrdlite.pl</code>, written in SWI Prolog</li>
+<li>
+<code>javaprolog/Shrdlite.java</code>, written in Java</li>
+<li>
+<code>haskell/Shrdlite.hs</code>, written in Haskell</li>
+<li>
+<code>python/shrdlite.py</code>, written in Python</li>
+</ul><p>Just uncomment the appropriate definitions of <code>SCRIPTDIR</code> and <code>SCRIPT</code> 
+in <code>ajaxwrapper.py</code>, and you should be ready to go.</p>
+
+<h2>
+<a name="speech-synthesis" class="anchor" href="#speech-synthesis"><span class="octicon octicon-link"></span></a>Speech synthesis</h2>
+
+<p>The latest versions of Safari (v6.1 or later) and Chrome (v33 or later) 
+have implemented the W3C Web Speech API. Shrdlite uses this if possible!</p>
+
+<ul>
+<li><a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html">https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html</a></li>
+<li><a href="http://www.broken-links.com/2013/09/20/web-speech-api-part-one-speech-synthesis">http://www.broken-links.com/2013/09/20/web-speech-api-part-one-speech-synthesis</a></li>
+</ul><h2>
+<a name="alternative-webserver" class="anchor" href="#alternative-webserver"><span class="octicon octicon-link"></span></a>Alternative webserver</h2>
+
+<p>If you want to use another webserver (such as the built-in Apache on a Mac), 
+then you might have to modify some files:</p>
+
+<ul>
+<li>
+<p>Some webservers only allow CGI scripts with file suffix ".cgi":</p>
+
+<ul>
+<li>Try to rename <code>cgi-bin/ajaxwrapper.py</code> to <code>cgi-bin/ajaxwrapper.py.cgi</code>
+(and edit <code>shrdlite.js</code> accordingly)</li>
+</ul>
+</li>
+<li>
+<p>Some webservers require that CGI scripts are in a certain directory:</p>
+
+<ul>
+<li>Try to rename the <code>cgi-bin</code> directory, or move <code>ajaxwrapper.py</code>
+to the directory above (and edit <code>shrdlite.js</code> accordingly)</li>
+</ul>
+</li>
+<li>
+<p>The program that <code>ajaxwrapper.py</code> calls might need another path:</p>
+
+<ul>
+<li>Try to replace the first argument of the <code>SCRIPT</code> variable in
+<code>ajaxwrapper.py</code>, e.g., <code>/usr/bin/python</code> with <code>/usr/local/bin/python</code>
+</li>
+</ul>
+</li>
+</ul><h2>
+<a name="the-command-line-program" class="anchor" href="#the-command-line-program"><span class="octicon octicon-link"></span></a>The command line program</h2>
+
+<p>The command line program takes JSON input and should produce JSON output.
+The input JSON contains the following fields:</p>
+
+<ul>
+<li>"utterance": a list of words (strings)</li>
+<li>"holding": an object identifier (string) or <code>null</code>
+</li>
+<li>"world": a list of list of object identifiers (strings)</li>
+<li>"objects": a mapping from object identifiers to information about them</li>
+</ul><p>The output JSON should contain at least the following:</p>
+
+<ul>
+<li>"output": a system utterance (string)</li>
+<li>"plan": a list of actions (strings)</li>
+</ul><p>It can also contain the fields "utterance", "trees" and "goals", but they 
+are only used for printing debug information.</p>
+
+<h2>
+<a name="grammars" class="anchor" href="#grammars"><span class="octicon octicon-link"></span></a>Grammars</h2>
+
+<p>All four given command line programs have include a grammar and a parser,
+which means that you do not have to implement parsing. 
+(If you don't want to modify the grammar of course).</p>
+
+<p>There are Shrdlite grammars that can be used in several different
+programming languages.</p>
+
+<h3>
+<a name="gf-grammatical-framework" class="anchor" href="#gf-grammatical-framework"><span class="octicon octicon-link"></span></a>GF (Grammatical Framework)</h3>
+
+<p>To use this grammar you need to install GF, 
+see instructions at <a href="http://www.grammaticalframework.org">http://www.grammaticalframework.org</a>.</p>
+
+<p>There are two grammar files, <code>ShrdliteGrammar.gf</code> (the abstract syntax) 
+and <code>ShrdliteGrammarEng.gf</code> (the English translations). </p>
+
+<p>Here is an example run from within the GF runtime:</p>
+
+<pre><code>&gt; i ShrdliteGrammarEng.gf
+ShrdliteGrammar&gt; p "put the white ball in a box on the floor"
+move (basic_entity the (object ball ?3 white)) (relative inside (relative_entity any (object box ?10 ?11) (relative ontop floor)))
+move (relative_entity the (object ball ?3 white) (relative inside (basic_entity any (object box ?9 ?10)))) (relative ontop floor)
+</code></pre>
+
+<p>This grammar is not used in any of the command line programs, but there
+are GF bindings for C/C++, Haskell and Python.</p>
+
+<h3>
+<a name="python-with-nltk" class="anchor" href="#python-with-nltk"><span class="octicon octicon-link"></span></a>Python (with NLTK)</h3>
+
+<p>To use this grammar you need to install Python and NLTK,
+see instructions here:</p>
+
+<ul>
+<li>
+<a href="http://www.python.org/">http://www.python.org/</a> (only if you have Windows)</li>
+<li><a href="http://www.nltk.org/">http://www.nltk.org/</a></li>
+</ul><p>There is one grammar file, <code>shrdlite_grammar.fcfg</code>, which can be used like this:</p>
+
+<pre><code>&gt;&gt;&gt; import nltk
+&gt;&gt;&gt; grammar = nltk.data.load("file:shrdlite_grammar.fcfg", cache=False)
+&gt;&gt;&gt; parser = nltk.FeatureChartParser(grammar)
+&gt;&gt;&gt; sentence = "put the white ball in a box on the floor".split()
+&gt;&gt;&gt; for tree in parser.nbest_parse(sentence): 
+...     print tree.label()['sem']
+(move, (basic_entity, the, (object, ball, -, white)), (relative, inside, (relative_entity, any, (object, box, -, -), (relative, ontop, floor))))
+(move, (relative_entity, the, (object, ball, -, white), (relative, inside, (basic_entity, any, (object, box, -, -)))), (relative, ontop, floor))
+</code></pre>
+
+<p>To test the command line program <code>shrdlite.py</code>, you can do this:</p>
+
+<pre><code>python shrdlite.py &lt; ../examples/medium.json
+</code></pre>
+
+<p><em>Note:</em> NLTK version 2.0b9 (which is the one that is installed by the Ubuntu package
+manager) contains an error in <code>nltk.FeatureChartParser</code>! If you have this version,
+please use <code>nltk.FeatureTopDownChartParser</code> instead.</p>
+
+<h3>
+<a name="prolog" class="anchor" href="#prolog"><span class="octicon octicon-link"></span></a>Prolog</h3>
+
+<p>There is one grammar file, <code>shrdlite_grammar.pl</code>, and one parser file
+<code>dcg_parser.pl</code>. They should be usable in most Prologs:</p>
+
+<pre><code>?- [shrdlite_grammar, dcg_parser].
+?- parse(command, [put,the,white,ball,in,a,box,on,the,floor], Tree).
+Tree = move(basic_entity(the, object(ball, -, white)), relative(inside, relative_entity(any, object(box, -, -), relative(ontop, floor)))) ;
+Tree = move(relative_entity(the, object(ball, -, white), relative(inside, basic_entity(any, object(box, -, -)))), relative(ontop, floor)) ;
+No (more) solutions
+</code></pre>
+
+<p>To test the command line program <code>shrdlite.pl</code> in SWI Prolog, you should 
+be able to do this:</p>
+
+<pre><code>swipl -q -g main,halt -s shrdlite.pl &lt; ../examples/medium.json
+</code></pre>
+
+<p>More information about SWI Prolog can found here: </p>
+
+<ul>
+<li><a href="http://www.swi-prolog.org/">http://www.swi-prolog.org/</a></li>
+</ul><h3>
+<a name="java" class="anchor" href="#java"><span class="octicon octicon-link"></span></a>Java</h3>
+
+<p>There are no good grammar libraries for Java, so this version uses the 
+Prolog grammar via the GNUPrologJava library. After compilation you can
+test the command line program like this:</p>
+
+<pre><code>java -cp gnuprologjava-0.2.6.jar:json-simple-1.1.1.jar:. Shrdlite &lt; ../examples/medium.json
+</code></pre>
+
+<p>Read more about the needed libraries here:</p>
+
+<ul>
+<li><a href="http://www.gnu.org/software/gnuprologjava/">http://www.gnu.org/software/gnuprologjava/</a></li>
+<li><a href="http://code.google.com/p/json-simple/">http://code.google.com/p/json-simple/</a></li>
+</ul><h3>
+<a name="haskell" class="anchor" href="#haskell"><span class="octicon octicon-link"></span></a>Haskell</h3>
+
+<p>The Haskell grammar is of course written as a combinator parser, 
+implemented as an <em>Applicative Functor</em> (McBride &amp; Paterson, 2008).</p>
+
+<pre><code>Prelude&gt; :l Shrdlite.hs
+Main&gt; let sent = words "put the white ball in a box on the floor"
+Main&gt; mapM_ print $ parse command sent
+Move (BasicEntity The (Object AnySize White Ball)) (Relative Inside (RelativeEntity Any (Object AnySize AnyColor Box) (Relative Ontop Floor)))
+Move (RelativeEntity The (Object AnySize White Ball) (Relative Inside (BasicEntity Any (Object AnySize AnyColor Box)))) (Relative Ontop Floor)
+</code></pre>
+
+<p>To test the command line program <code>Shrdlite.hs</code> just do this:</p>
+
+<pre><code>runhaskell Shrdlite.hs &lt; ../examples/medium.json
+</code></pre>
+
+<p>To be able to read and write JSON, you have to install Text.JSON:</p>
+
+<ul>
+<li><a href="http://hackage.haskell.org/package/json">http://hackage.haskell.org/package/json</a></li>
+</ul>
+        </section>
+
+        <footer>
+          Shrdlite-template is maintained by <a href="https://github.com/heatherleaf">heatherleaf</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
