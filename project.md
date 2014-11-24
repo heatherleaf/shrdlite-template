@@ -1,6 +1,5 @@
-% AI course project: Shrdlite
-% 
-% 
+---
+---
 
 <script>setMenuItem("project")</script>
 
