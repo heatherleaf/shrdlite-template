@@ -12,5 +12,5 @@ The goal of the project is to create an interpreter and a planner so that
 a person can control a robot in a blocks world to move around objects,
 by giving commands in natural language.
 
-The project is described [more in-depth here](project-description.html),
-and there is a [quick-and-dirty demo here](shrdlite/shrdlite.html).
+The project is described [more in-depth here](project-description.html)
+
