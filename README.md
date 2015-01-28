@@ -1,6 +1,5 @@
----
-title: Shrdlite project README
----
+Shrdlite project README
+========================
 
 Shrdlite is a programming project in Artificial Intelligence, a course given 
 at the University of Gothenburg and Chalmers University of Technology.
