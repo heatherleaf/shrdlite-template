@@ -1,0 +1,113 @@
+
+/**
+ * Basic styling
+ */
+body {
+    margin: 2em;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 300;
+    color: black;
+    background-color: white;
+}
+
+
+
+/**
+ * Set `margin-bottom` to maintain vertycal rhythm
+ */
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure {
+    margin-bottom: 1ex;
+}
+
+
+
+/**
+ * Images
+ */
+img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+
+
+/**
+ * Lists
+ */
+ul, ol {
+    margin-left: 1em;
+}
+
+li > ul, li > ol {
+    margin-bottom: 0;
+}
+
+
+
+/**
+ * Headings
+ */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+
+
+/**
+ * Links
+ */
+a {
+    color: #00f;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+a:visited {
+    color: #00b;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+    color: darkgrey;
+    margin-left: 2em;
+    font-style: italic;
+}
+
+
+
+/**
+ * Code formatting
+ */
+pre, code {
+    border: 1px solid grey;
+    border-radius: 3px;
+    background-color: #eef;
+}
+
+code {
+    padding: 1px 5px;
+}
+
+pre {
+    padding: 8px 12px;
+    overflow-x: scroll;
+}
+
+pre > code {
+    border: 0;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+

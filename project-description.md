@@ -1,9 +1,6 @@
 ---
+title: Shrdlite project description
 ---
-
-<script>setMenuItem("project")</script>
-
-*<b>Note:</b> This document also exists in a <a href="project.pdf">PDF version</a>.*
 
 Introduction
 ================
